@@ -24,25 +24,7 @@ public class AdminActionMenuService {
     }
 
     public void showAuditUsers() {
-        execute.executeWithCustomBack(back -> {
-            renderUsers();
-
-            System.out.print("Введите ид пользователя: ");
-
-            int id = inputUser.inputId();
-
-            try {
-                User user = userService.getById(id);
-                //trainingActionMenuService.getAllTrainings(user);
-            } catch (UserIdNotFoundException e) {
-                System.out.println(e.getMessage());
-            }
-
-            System.out.println("0 - Вернуться назад");
-            System.out.println("1 - Посмотреть других пользователей");
-
-            return execute.inputBackOption();
-        });
+        System.out.println("В разработке");
     }
 
     public void showTrainingsUser() {
