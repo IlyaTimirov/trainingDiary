@@ -1,7 +1,9 @@
 package org.ylab.homework.timirov.traningdiary.service;
 
 import org.ylab.homework.timirov.traningdiary.entity.User;
+import org.ylab.homework.timirov.traningdiary.exception.UsernameAlreadyExistsException;
 import org.ylab.homework.timirov.traningdiary.exception.UsernameNotFoundException;
+import org.ylab.homework.timirov.traningdiary.repository.UserRepository;
 
 import static org.ylab.homework.timirov.traningdiary.Main.principal;
 
@@ -34,7 +36,7 @@ public class AuthenticationService {
         return isAuthentication;
     }
 
-    public void registration(String username, String password) {
+    public void registration(String username, String password) throws UsernameAlreadyExistsException {
         User user = new User(username, password);
         userService.save(user);
     }

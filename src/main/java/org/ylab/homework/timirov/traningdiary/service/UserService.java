@@ -2,6 +2,7 @@ package org.ylab.homework.timirov.traningdiary.service;
 
 import org.ylab.homework.timirov.traningdiary.entity.User;
 import org.ylab.homework.timirov.traningdiary.exception.UserIdNotFoundException;
+import org.ylab.homework.timirov.traningdiary.exception.UsernameAlreadyExistsException;
 import org.ylab.homework.timirov.traningdiary.exception.UsernameNotFoundException;
 import org.ylab.homework.timirov.traningdiary.repository.RoleRepository;
 import org.ylab.homework.timirov.traningdiary.repository.RoleRepositoryImpl;
@@ -33,7 +34,10 @@ public class UserService {
     public User getById(int id) throws UserIdNotFoundException {
         return userRepository.findById(id).orElseThrow(() -> new UserIdNotFoundException(id));
     }
-    public void save(User user){
+    public void save(User user) throws UsernameAlreadyExistsException{
+        if(userRepository.findByUsername(user.getUsername()).isPresent()){
+            throw new UsernameAlreadyExistsException(user.getUsername());
+        }
         user.setRoles(roleRepository.findBy("USER"));
         userRepository.save(user);
     }
